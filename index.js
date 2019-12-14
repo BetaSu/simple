@@ -1,13 +1,13 @@
 const {
   Machine,
   dataStructure: {
-    Num, Bool, DoNothing
+    Num, Bool
   },
   statement: {
-    If
+    If, DoNothing
   },
   expression: {
-    Add, Multiply, LessThan, Assign
+    Add, Multiply, LessThan, Assign, Variable
   }
 } = require('./src');;
 
@@ -36,21 +36,9 @@ const {
 
 new Machine(
   new If(
-    new LessThan(new Num(32), new Num(7)),
-    new Assign(
-      'whentrueVar',
-      new Add(
-        new Num(4), 
-        new Multiply(new Num(3), new Num(8))
-      )
-    ),
-    new Assign(
-      'whenFalseVar',
-      new Multiply(
-        new Num(4), 
-        new Multiply(new Num(3), new Num(8))
-      )
-    )
-  )
+    new Variable('x'),
+    new Assign('y', new Num(1)),
+    new Assign('y', new Num(2))
+  ),
+  {x: new Bool(true)}
 )
-

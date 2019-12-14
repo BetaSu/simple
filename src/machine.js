@@ -13,13 +13,16 @@ module.exports = class Machine {
     }
     this.statement = result;
   }
+  console() {
+    console.log(`表达式：${this.statement} 环境变量：${JSON.stringify(this.env)}`);
+  }
   run() {
-    console.log('开始解析代码。。。。。。。。');
+    console.log('------------开始解析代码------------');
     while(this.statement.reducible()) {
-      console.log(`表达式：${this.statement} 环境变量：${JSON.stringify(this.env)}`);
+      this.console();
       this.step();
     }
-    console.log(`表达式：${this.statement} 环境变量：${JSON.stringify(this.env)}`);
-    console.log('结束解析代码。。。。。。。。');
+    this.console();
+    console.log('------------结束解析代码------------');
   }
 }
