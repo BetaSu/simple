@@ -14,7 +14,11 @@ module.exports = class Machine {
     this.statement = result;
   }
   console() {
-    console.log(`表达式：${this.statement} 环境变量：${JSON.stringify(this.env)}`);
+    const envFormat = {};
+    Object.keys(this.env).forEach(key => {
+      envFormat[key] = this.env[key].value;
+    })
+    console.log(`${this.statement} \nenv：${JSON.stringify(envFormat)}\n`);
   }
   run() {
     console.log('------------开始解析代码------------');

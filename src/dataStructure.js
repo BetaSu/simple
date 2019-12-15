@@ -6,7 +6,7 @@ class DataStruc extends Struc {
     this.value = value;
   }
   isEqual(data) {
-
+    return Object.getPrototypeOf(data) === Object.getPrototypeOf(this) && data.value === this.value;
   }
   toString() {
     return `${this.value}`;

@@ -4,10 +4,10 @@ const {
     Num, Bool
   },
   statement: {
-    If, DoNothing
+    If, DoNothing, Sequence, Assign
   },
   expression: {
-    Add, Multiply, LessThan, Assign, Variable
+    Add, Multiply, LessThan, Variable
   }
 } = require('./src');;
 
@@ -34,11 +34,19 @@ const {
 //   )
 // )
 
+// new Machine(
+//   new If(
+//     new Variable('x'),
+//     new Assign('y', new Num(1)),
+//     new Assign('y', new Num(2))
+//   ),
+//   {x: new Bool(true)}
+// )
+
 new Machine(
-  new If(
-    new Variable('x'),
-    new Assign('y', new Num(1)),
-    new Assign('y', new Num(2))
+  new Sequence(
+    new Assign('y', new Add(new Num(1), new Variable('x'))),
+    new Assign('z', new Multiply(new Variable('y'), new Num(7)))
   ),
-  {x: new Bool(true)}
+  {x: new Num(3)}
 )
