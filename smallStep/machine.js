@@ -1,4 +1,4 @@
-// 虚拟机，执行规约过程
+// 小步语义执行的虚拟机，执行规约过程
 module.exports = class Machine {
   constructor(statement, env = {}) {
     this.statement = statement;

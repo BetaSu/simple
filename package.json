@@ -4,7 +4,8 @@
   "description": "用js实现的简易语言",
   "main": "index.js",
   "scripts": {
-    "start": "node ./"
+    "ss": "node ./smallStep-test.js",
+    "fa": "node ./finiteAutomaton"
   },
   "repository": {
     "type": "git",
