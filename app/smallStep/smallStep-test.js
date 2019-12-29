@@ -9,7 +9,7 @@ const {
   expression: {
     Add, Multiply, LessThan, Variable
   }
-} = require('./src');;
+} = require('./');;
 
 
 // new Machine(
