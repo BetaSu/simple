@@ -14,10 +14,3 @@ const pattern = new Repeat(
   )
 );
 
-// console.log('pattern: ' +  pattern)
-
-// console.log(new Empty().toNFADesign().accepts(''));
-// console.log(new Empty().toNFADesign().accepts('a'));
-// console.log(new Literal('a').toNFADesign().accepts(''));
-// console.log(new Concatenate(new Literal("a"), new Concatenate(new Literal("b"), new Literal('c'))).matches("abc"));
-console.log(new Choose(new Literal("a"), new Concatenate(new Literal("b"), new Literal('c'))).matches("a"));

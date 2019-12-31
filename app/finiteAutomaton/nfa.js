@@ -56,7 +56,7 @@ class NFA {
   }
   readString(string) {
     string.split('').forEach(str => {
-      console.log('read str', str);
+      // console.log('read str', str);
       this.readCharacter(str);
     })
   }

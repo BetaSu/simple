@@ -128,11 +128,29 @@ class Repeat extends Pattern {
 	}
 	/** 
 	 * 思路：
-	 * 从接受状态到开始状态增加一个自由移动，
-	 * 增加可自由移动到旧的开始状态的新状态，并使其作为
+	 * 从接受状态到开始状态增加一个自由移动，这样就能匹配多于1个
+	 * 增加可自由移动到旧的开始状态的新状态，并使其作为接受状态，这样就能匹配空
+	 * 需要：
+	 * 一个新的起始状态，它也是一个接受状态 注意：之所以不使用旧的起始状态，因为复杂情况（ex: (a*b)*）可能会产生接受除空字符串外其他非匹配字符串
+	 * 旧的NFA中所有的接受状态
+	 * 旧的NFA中所有的规则
+	 * 额外的自由移动，连接旧的接受状态与旧的起始状态
+	 * 另一些自由移动，连接新的起始状态与旧的起始状态
 	*/
 	toNFADesign() {
-
+		const nfaDesign = this.pattern.toNFADesign();
+		const oldStartState = nfaDesign.startState;
+		const newStartState = Symbol('repeat start');
+		const acceptStates = nfaDesign.acceptStates.concat(newStartState);
+		const oldRules = nfaDesign.rulebook.rules;
+		const rulesForMoreThanOne = acceptStates.map(state => {
+			return new FARule(state, null, newStartState);
+		})
+		const rulesForEmpty = acceptStates.map(state => {
+			return new FARule(newStartState, null, state);
+		})
+		const rules = oldRules.concat(rulesForMoreThanOne, rulesForEmpty, new FARule(newStartState, null, oldStartState));
+		return new NFADesign(newStartState, acceptStates, new NFARuleBook(rules));
 	}
 }
 

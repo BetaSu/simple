@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "ss": "node ./smallStep-test.js",
+    "test": "jest",
     "fa": "node ./finiteAutomaton"
   },
   "repository": {
@@ -17,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/BetaSu/simple/issues"
   },
-  "homepage": "https://github.com/BetaSu/simple#readme"
+  "homepage": "https://github.com/BetaSu/simple#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0"
+  }
 }
