@@ -40,18 +40,23 @@ class NFARuleBook {
 
 class NFA {
   constructor(currentStates, acceptStates, rulebook) {
-    this.currentStates = rulebook.followFreeMoves(currentStates);
+    // 当前状态到获取需要使用自由移动后的值
+    this._currentStates = currentStates;
     this.acceptStates = new Set(acceptStates);
     this.rulebook = rulebook;
+  }
+  get currentStates() {
+    return this.rulebook.followFreeMoves(this._currentStates);
   }
   accepting() {
     return this.currentStates.intersection(this.acceptStates).size !== 0;
   }
   readCharacter(character) {
-    this.currentStates = this.rulebook.nextStates(this.currentStates, character);
+    this._currentStates = this.rulebook.nextStates(this.currentStates, character);
   }
   readString(string) {
     string.split('').forEach(str => {
+      console.log('read str', str);
       this.readCharacter(str);
     })
   }
@@ -59,12 +64,12 @@ class NFA {
 
 class NFADesign {
   constructor(startState, acceptStates, rulebook) {
-    this.startState = [startState];
+    this.startState = startState;
     this.acceptStates = acceptStates;
     this.rulebook = rulebook;
   }
   toNFA() {
-    return new NFA(this.startState, this.acceptStates, this.rulebook);
+    return new NFA([this.startState], this.acceptStates, this.rulebook);
   }
   accepts(string) {
     const nfa = this.toNFA();
