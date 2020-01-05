@@ -10,6 +10,11 @@ class NFARuleBook {
   constructor(rules) {
     this.rules = rules;
   }
+  // 该rulebook可以接受哪些字符
+  alphabet() {
+    const characters = this.rules.map(({character}) => character);
+    return new Set(characters);
+  }
   // 处于 states 中的几种状态之一，读取了一个字符后，可能的下一个状态是？
   nextStates(states, character) {
     const result = new Set();
@@ -53,12 +58,14 @@ class NFA {
   }
   readCharacter(character) {
     this._currentStates = this.rulebook.nextStates(this.currentStates, character);
+    return this;
   }
   readString(string) {
     string.split('').forEach(str => {
       // console.log('read str', str);
       this.readCharacter(str);
     })
+    return this;
   }
 }
 
@@ -68,13 +75,28 @@ class NFADesign {
     this.acceptStates = acceptStates;
     this.rulebook = rulebook;
   }
-  toNFA() {
-    return new NFA([this.startState], this.acceptStates, this.rulebook);
+  toNFA(currentStates = [this.startState]) {
+    return new NFA(currentStates, this.acceptStates, this.rulebook);
   }
   accepts(string) {
     const nfa = this.toNFA();
     nfa.readString(string);
     return nfa.accepting();
+  }
+}
+
+/** 
+ * @description 通过NFA模拟DFA
+*/
+class NFASimulation {
+  constructor(nfaDesign) {
+    this.nfaDesign = nfaDesign;
+  }
+  nextState(state, character) {
+    return this.nfaDesign.toNFA(state).readCharacter(character).currentStates;
+  }
+  rulesFor(state) {
+
   }
 }
 
