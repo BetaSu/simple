@@ -7,5 +7,16 @@
 - 大步语义：定义如何从一个表达式或者语句直接得到他的结果。
 - DFA(Deterministic Finite Automaton) 确定性有限状态机
 - NFA(Non-deterministic Finite Automaton) 确定性有限状态机
+### 下推自动机（PushDown Automaton）
+自带栈的有限状态机叫下推自动机PDA。如果这台机器的规则是确定性的，就叫确定性下推自动机DPDA（Deterministic PushDown Automaton）。
+## PDA规则
+组成一个PDA的规则氛围5部分：
+- 机器当前状态
+- 必须从输入读取的字符（可选）
+- 机器的下一个状态
+- 必须从栈中弹出的字符
+- 栈顶字符弹出后需要推入栈中的字符序列
+
+
 ## 参考资料
 计算的本质
