@@ -68,8 +68,8 @@ class NFADesign {
     this.acceptStates = acceptStates;
     this.rulebook = rulebook;
   }
-  toNFA() {
-    return new NFA([this.startState], this.acceptStates, this.rulebook);
+  toNFA(currentStates = [this.startState]) {
+    return new NFA(currentStates, this.acceptStates, this.rulebook);
   }
   accepts(string) {
     const nfa = this.toNFA();
